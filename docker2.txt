@@ -1,0 +1,42 @@
+FROM amazonlinux
+
+WORKDIR /opt
+
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.60/bin/apache-tomcat-9.0.60.zip /opt
+
+RUN yum install unzip -y
+
+RUN unzip /opt/apache-tomcat-9.0.60.zip
+
+RUN chmod +x /opt/apache-tomcat-9.0.60/bin/*
+
+RUN amazon-linux-extras install java-openjdk11 -y
+
+COPY ./dptweb-1.0.war /opt/apache-tomcat-9.0.60/webapps/
+
+CMD ["/opt/apache-tomcat-9.0.60/bin/catalina.sh", "run"]
+
+
+1. sudo su -
+2. wget --user=yaminidayanithi15@gmail.com --password=Yamini@1510 (var file link)
+3. ls -l
+4. vi Dockerfile
+ -->I
+ --> paste the file 
+  esc
+  :wq
+
+5. ls -l
+6. amazon-linux-extras install docker -y
+7. service docker start
+8. service docker status
+9.pwd
+10. ls -l
+11. docker build -t docker1599/dftweb:1.0
+12. docker images
+13. docker run -d --name containerweb -p 8080:8080 docker1599/dftweb:1.0
+14. docker ps
+15.instance --> security group -->inbound rules(custom tcp) port range (8080)
+
+
+copy the ec2 ip and add :8080/dpweb-1.0
